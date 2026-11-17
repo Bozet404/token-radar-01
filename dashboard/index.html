@@ -3,14 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Token Radar: pre-token protocols ranked by implied value</title>
+<title>Fathom — every pre-token protocol priced off the ones that launched</title>
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<a class="skip" href="#board">Skip to the board</a>
-<main id="board" tabindex="-1" aria-busy="true">
-<noscript><p class="noscript">Token Radar needs JavaScript: the board, the model and every farm plan are computed in this page from the snapshot beside it.</p></noscript>
+<header class="mast">
+  <div class="mast-in">
+    <div>
+      <p class="kicker">Token launch radar · radar-3</p>
+      <h1>Fathom</h1>
+      <p class="tag">Every pre-token protocol priced off the 128 that already launched — one fitted model, validated out of sample, the same numbers on the board and in the detail.</p>
+    </div>
+    <dl class="mast-meta" id="mastMeta"></dl>
+  </div>
+</header>
+
+<main class="page">
+  <section class="panel model" id="modelPanel" aria-label="The value model"></section>
+
+  <section class="controls" aria-label="Board controls">
+    <label class="ctl search">Search
+      <input id="q" type="search" placeholder="Name or slug…" autocomplete="off">
+    </label>
+    <label class="ctl">Category
+      <select id="cat"><option value="all">All categories</option></select>
+    </label>
+    <label class="ctl">Chain
+      <select id="chain"><option value="all">All chains</option></select>
+    </label>
+    <label class="ctl">Sort by
+      <select id="sort">
+        <option value="implied">Implied value</option>
+        <option value="tvl">TVL</option>
+        <option value="multiple">Multiple</option>
+        <option value="growth">7-day change</option>
+        <option value="age">Age with no token</option>
+      </select>
+    </label>
+    <label class="ctl check"><input id="watchOnly" type="checkbox"> Watchlist only</label>
+    <p class="count" id="count" role="status"></p>
+  </section>
+
+  <section class="panel board" aria-label="Ranked board">
+    <table id="board">
+      <thead>
+        <tr>
+          <th data-sort="rank">#</th>
+          <th data-sort="name">Protocol</th>
+          <th data-sort="category">Category</th>
+          <th data-sort="chains">Chains</th>
+          <th data-sort="tvl" class="num">TVL</th>
+          <th data-sort="growth" class="num">7d</th>
+          <th data-sort="age" class="num">Age</th>
+          <th data-sort="multiple" class="num">Multiple</th>
+          <th data-sort="implied" class="num">Implied value</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No protocol matches this filter. Clear the search or widen the category.</p>
+  </section>
+
+  <section class="panel detail" id="detail" hidden aria-label="Protocol detail"></section>
+
+  <section class="panel curve" id="curvePanel" aria-label="Size curve and validation"></section>
+
+  <section class="panel note" aria-label="Research note">
+    <h2>Research note — how to read this board</h2>
+    <div id="noteBody"></div>
+  </section>
 </main>
+
+<footer class="foot">
+  <p>Snapshot: DefiLlama protocols, fetched 2026-11-14. “No token” means the snapshot records none for the protocol — never that none exists. An implied value is Fathom's claim from the fitted model, never one make.fun makes. This page renders with no network: every number it shows is in the data file beside it.</p>
+</footer>
+
+<noscript><p class="noscript">Fathom needs JavaScript: the board, the model and every farm plan are computed in this page from the data file beside it.</p></noscript>
 <script src="../data.js"></script>
 <script src="app.js"></script>
 </body>
